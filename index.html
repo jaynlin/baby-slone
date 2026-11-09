@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Baby Slone: Girl or Boy?</title>
+<meta name="description" content="Cast your guess! Jaynlin & Jackson reveal on Friday.">
+<meta property="og:title" content="Baby Slone: Girl or Boy? 🎀🧸">
+<meta property="og:description" content="Cast your guess! Jaynlin & Jackson reveal on Friday.">
+<meta name="theme-color" content="#fefcfc">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap">
+<style>
+:root {
+  --bg: #fefcfc;
+  --surface: #ffffff;
+  --ink: #5d5266;
+  --muted: #9a8fa2;
+  --pink: #f8d7e4;
+  --pink-deep: #dc8fae;
+  --pink-soft: #fdf0f5;
+  --blue: #d3e8f8;
+  --blue-deep: #7fb0d8;
+  --blue-soft: #f0f7fd;
+  --line: #f3ecf0;
+  --display: "Baloo 2", "Comic Sans MS", system-ui, sans-serif;
+  --body: "Nunito", system-ui, -apple-system, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  background-image:
+    radial-gradient(circle at 8% 10%, var(--pink-soft) 0 120px, transparent 121px),
+    radial-gradient(circle at 96% 28%, var(--blue-soft) 0 150px, transparent 151px),
+    radial-gradient(circle at 10% 92%, var(--blue-soft) 0 90px, transparent 91px),
+    radial-gradient(circle at 90% 96%, var(--pink-soft) 0 110px, transparent 111px);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.55;
+  padding: 0 16px;
+  padding-block: calc(32px + env(safe-area-inset-top, 0px)) calc(48px + env(safe-area-inset-bottom, 0px));
+}
+.wrap { max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+
+header { text-align: center; display: flex; flex-direction: column; gap: 4px; align-items: center; }
+.feet { font-size: 26px; letter-spacing: 6px; }
+.baby {
+  font-family: var(--display); font-weight: 700; font-size: clamp(28px, 8vw, 38px); line-height: 1;
+  background: linear-gradient(90deg, var(--pink-deep), var(--blue-deep));
+  -webkit-background-clip: text; background-clip: text; color: transparent; padding: 0 4px;
+}
+h1 { font-family: var(--display); font-weight: 800; margin: 0; line-height: 1.02; font-size: clamp(52px, 15vw, 80px); }
+h1 .g { color: var(--pink-deep); }
+h1 .b { color: var(--blue-deep); }
+h1 .or { color: var(--muted); font-weight: 500; font-size: .5em; vertical-align: middle; padding: 0 .15em; }
+.parents { margin: 6px 0 0; font-weight: 700; }
+.sub { margin: 0; color: var(--muted); }
+
+.card {
+  background: var(--surface); border: 1.5px solid var(--line); border-radius: 28px;
+  box-shadow: 0 10px 34px -20px var(--pink-deep);
+  padding: 24px; display: flex; flex-direction: column; gap: 20px;
+}
+label.q { font-family: var(--display); font-weight: 700; font-size: 20px; display: block; margin-bottom: 8px; }
+input[type="text"] {
+  width: 100%; font: inherit; font-size: 18px; color: var(--ink);
+  padding: 14px 18px; border-radius: 18px; border: 2px solid var(--line); background: var(--bg);
+  outline: none; transition: border-color .2s;
+}
+input[type="text"]:focus { border-color: var(--blue-deep); }
+input::placeholder { color: var(--muted); }
+
+.choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.choice {
+  font: inherit; cursor: pointer; border-radius: 24px; padding: 18px 10px;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  border: 2.5px solid transparent; transition: transform .15s ease, border-color .2s, background .2s;
+  color: var(--ink);
+}
+.choice .emoji { font-size: 40px; line-height: 1.1; }
+.choice .word { font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1.1; }
+.choice .team { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.choice.girl { background: var(--pink-soft); }
+.choice.girl .word { color: var(--pink-deep); }
+.choice.boy { background: var(--blue-soft); }
+.choice.boy .word { color: var(--blue-deep); }
+.choice:hover { transform: translateY(-2px); }
+.choice.girl[aria-pressed="true"] { border-color: var(--pink-deep); background: var(--pink); }
+.choice.boy[aria-pressed="true"] { border-color: var(--blue-deep); background: var(--blue); }
+.choice:focus-visible, .send:focus-visible, .link:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+.send {
+  font: inherit; font-family: var(--display); font-weight: 700; font-size: 22px; cursor: pointer;
+  border-radius: 999px; padding: 14px 24px; color: var(--ink); width: 100%;
+  background: linear-gradient(90deg, var(--pink), var(--surface) 50%, var(--blue));
+  border: 2px solid var(--line); box-shadow: 0 6px 0 var(--line);
+  transition: transform .15s ease, box-shadow .15s ease, opacity .2s;
+}
+.send:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--line); }
+.send:disabled { opacity: .5; cursor: default; }
+.error { color: #c0567f; font-weight: 700; font-size: 15px; margin: -6px 0 0; text-align: center; }
+
+.thanks { text-align: center; align-items: center; padding-block: 36px; }
+.thanks .big { font-size: 56px; line-height: 1; animation: pop .7s cubic-bezier(.3,1.6,.5,1); }
+.thanks h2 { font-family: var(--display); font-weight: 800; font-size: 32px; margin: 0; line-height: 1.1; }
+.thanks p { margin: 0; color: var(--muted); }
+.link { font: inherit; font-weight: 700; color: var(--blue-deep); background: none; border: 0; cursor: pointer; text-decoration: underline; padding: 4px; }
+@keyframes pop { from { transform: scale(.3); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+footer { text-align: center; color: var(--muted); font-size: 14px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="feet" aria-hidden="true">👣</div>
+    <div class="baby">Baby Slone</div>
+    <h1><span class="g">Girl</span><span class="or">or</span><span class="b">Boy</span>?</h1>
+    <p class="parents">Jaynlin &amp; Jackson find out together</p>
+    <p class="sub">Cast your guess. The big reveal is Friday!</p>
+  </header>
+
+  <form class="card" id="voteForm" novalidate>
+    <div>
+      <label class="q" for="name">Your name</label>
+      <input type="text" id="name" name="name" placeholder="e.g. Aunt Lisa" autocomplete="name" maxlength="60">
+    </div>
+    <div>
+      <span class="q" id="guessLabel" style="font-family:var(--display);font-weight:700;font-size:20px;display:block;margin-bottom:8px">Your guess</span>
+      <div class="choices" role="group" aria-labelledby="guessLabel">
+        <button type="button" class="choice girl" id="pickGirl" data-vote="Girl" aria-pressed="false">
+          <span class="emoji" aria-hidden="true">🎀</span><span class="word">Girl</span><span class="team">Team Pink</span>
+        </button>
+        <button type="button" class="choice boy" id="pickBoy" data-vote="Boy" aria-pressed="false">
+          <span class="emoji" aria-hidden="true">🧸</span><span class="word">Boy</span><span class="team">Team Blue</span>
+        </button>
+      </div>
+    </div>
+    <p class="error" id="error" hidden></p>
+    <button type="submit" class="send" id="send">Send my guess</button>
+  </form>
+
+  <section class="card thanks" id="thanks" hidden>
+    <div class="big" id="thanksEmoji">🎀</div>
+    <h2 id="thanksTitle">Thank you!</h2>
+    <p id="thanksText">Your guess is in.</p>
+    <p>Stay tuned for Friday's reveal 💗💙</p>
+    <button type="button" class="link" id="again">Someone else voting on this phone?</button>
+  </section>
+
+  <footer>With love, Jaynlin &amp; Jackson</footer>
+</div>
+
+<script>
+const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfPzHMN4eD0WgvdZOjWEe_fhYlBhkgcYsFIaY7c134vK2kHpw/formResponse";
+const NAME_FIELD = "entry.2142909264";
+const VOTE_FIELD = "entry.357343731";
+
+const $ = id => document.getElementById(id);
+let choice = null;
+
+document.querySelectorAll(".choice").forEach(btn => {
+  btn.addEventListener("click", () => {
+    choice = btn.dataset.vote;
+    document.querySelectorAll(".choice").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
+    $("error").hidden = true;
+  });
+});
+
+function showError(msg) { $("error").textContent = msg; $("error").hidden = false; }
+
+$("voteForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const name = $("name").value.trim();
+  if (!name) { showError("Please type your name first."); $("name").focus(); return; }
+  if (!choice) { showError("Tap Girl or Boy to pick your guess."); return; }
+
+  const send = $("send");
+  send.disabled = true; send.textContent = "Sending…";
+  const body = new URLSearchParams({ [NAME_FIELD]: name, [VOTE_FIELD]: choice });
+  try {
+    await fetch(FORM_URL, { method: "POST", mode: "no-cors", body });
+    try { localStorage.setItem("babySloneVote", JSON.stringify({ name, choice })); } catch (_) {}
+    showThanks(name, choice);
+  } catch (_) {
+    showError("That didn't go through. Check your internet and try again.");
+  } finally {
+    send.disabled = false; send.textContent = "Send my guess";
+  }
+});
+
+function showThanks(name, vote) {
+  const first = name.split(" ")[0];
+  $("thanksEmoji").textContent = vote === "Girl" ? "🎀" : "🧸";
+  $("thanksTitle").textContent = `Thank you, ${first}!`;
+  $("thanksText").textContent = `You're on Team ${vote === "Girl" ? "Pink" : "Blue"}. Your guess is in.`;
+  $("voteForm").hidden = true;
+  $("thanks").hidden = false;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+$("again").addEventListener("click", () => {
+  $("name").value = ""; choice = null;
+  document.querySelectorAll(".choice").forEach(b => b.setAttribute("aria-pressed", "false"));
+  $("thanks").hidden = true; $("voteForm").hidden = false; $("name").focus();
+});
+
+try {
+  const saved = JSON.parse(localStorage.getItem("babySloneVote") || "null");
+  if (saved && saved.name && saved.choice) showThanks(saved.name, saved.choice);
+} catch (_) {}
+</script>
+</body>
+</html>
